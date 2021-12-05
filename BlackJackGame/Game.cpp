@@ -32,16 +32,51 @@ void Game::playGame() {
 		regularPlayer.setCardInHand(d.drawCard());
 		firstShowCards(regularPlayer);
 		checkSumCardsInHand(regularPlayer);
-		
 		playerResponse = askPlayerForCard(regularPlayer);
 	}
+
+
+	while (dealer.sumCardsInHand() < 17) {
+		displayCards(dealer);
+		displayCards(regularPlayer);
+		dealer.setCardInHand(d.drawCard());
+	}
+
+	std::cout << std::endl;
+	std::cout << " ---------FINAL------------ ";
+	std::cout << std::endl;
+	
+	displayCards(dealer);
+	displayCards(regularPlayer);
+
+	std::cout << "Dealer hand total: " << dealer.sumCardsInHand() << std::endl;
+	std::cout << "Player hand total: " << regularPlayer.sumCardsInHand() << std::endl;
+
+	checkWhoWon(dealer.sumCardsInHand(), regularPlayer.sumCardsInHand());
+
 }
+
+void Game::checkWhoWon(int dealerHand, int playerHand) {
+	
+	if (dealerHand > playerHand) {
+		std::cout << "Dealer won!";
+	}
+	else if (dealerHand < playerHand) {
+		std::cout << "Player won!";
+	}
+	else {
+		std::cout << "Its even no one won!";
+	}
+
+}
+
+
 
 void Game::firstShowCards(Player p) {
 
 	if (p.getPlayerType() == "player") {
 		std::cout << p.getPlayerType() << " hand:" << std::endl;
-		for (auto c : p.getCardsInHand()) {
+		for (auto c : p.getCardsInHand()) { 
 			c.displayCard();
 			std::cout << std::endl;
 		}

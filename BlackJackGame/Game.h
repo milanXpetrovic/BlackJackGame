@@ -17,7 +17,7 @@ public:
 	void displayCards(Player);
 	bool askPlayerForCard(Player);
 	void checkSumCardsInHand(Player);
-	
+	void checkWhoWon(int dealerHand, int playerHand);
 private:
 	
 };
